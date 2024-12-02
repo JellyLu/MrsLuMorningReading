@@ -10,10 +10,6 @@ export const router = createBrowserRouter(
       children: [
         {
           path: "/",
-          lazy: () => import("./pages/Home"),
-        },
-        {
-          path: "/terms",
           lazy: () => import("./pages/TermList"),
           handle: { bgColor: "#FFF4EA" },
         },
