@@ -1,0 +1,15 @@
+ {
+  "$schema": "https://json.schemastore.org/cosmos-config",
+  "globalImports": ["src/index.css"],
+  "port": 6001,
+  "plugins": ["react-cosmos-plugin-vite"],
+  "ui": {
+    "responsivePreview": {
+      "devices": [
+        { "label": "iPhone X", "width": 375, "height": 812 },
+        { "label": "iPhone SE", "width": 375, "height": 667 },
+        { "label": "iPad Air", "width": 820, "height": 1180 }
+      ]
+    }
+  }
+}
