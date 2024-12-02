@@ -1,10 +1,11 @@
-import { createBrowserRouter, Outlet } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
+import PadAdapter from "./pages/PadAdapter";
 
 export const router = createBrowserRouter(
   [
     {
       element: (
-        <Outlet/>
+        <PadAdapter />
       ),
       children: [
         {
@@ -12,14 +13,13 @@ export const router = createBrowserRouter(
           lazy: () => import("./pages/Home"),
         },
         {
-          // index: true,
           path: "terms",
           lazy: () => import("./pages/TermList"),
           handle: { bgColor: "#FFF4EA" },
         },
         {
-          path: "term/:termId/lessons",
-          lazy: () => import("./pages/Lessons"),
+          path: "term/:termId",
+          lazy: () => import("./pages/Term"),
           handle: { bgColor: "#FFF4EA" },
         },
         {
