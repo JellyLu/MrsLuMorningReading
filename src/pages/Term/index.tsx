@@ -24,9 +24,9 @@ export function Component() {
                     <div
                       className="my-1"
                       key={unit.id}
-                      onClick={() => navigate(`/term/${term.id}/section/${id}/unit/${unit.id}`)}
+                      onClick={() => navigate(`/term/${term?.id}/section/${id}/unit/${unit?.id}`)}
                     >
-                      <span className="text-xl text-aux-2 font-bold">{unit.name}{" >"}</span>
+                      <span className="text-xl text-aux-2 font-bold">{unit?.name}{" >"}</span>
                     </div>
                   ))
                 }

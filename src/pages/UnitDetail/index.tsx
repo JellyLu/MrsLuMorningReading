@@ -12,7 +12,7 @@ interface WordCardProps {
   isPlaying?: boolean;
 }
 const WordCard = ({ className, word, onClick, isPlaying = false, size = "small" }: WordCardProps) => {
-  const { id, imgUrl, text, audio } = word;
+  const { id, imgUrl, text } = word;
   return (
     <div
       key={id}
@@ -46,6 +46,10 @@ const WordCard = ({ className, word, onClick, isPlaying = false, size = "small" 
 export function Component() {
   const { unit } = useTerms();
   const [current, setCurrent] = useState(0);
+
+  if (!unit) {
+    return null;
+  }
 
   return (
     <div className="w-screen h-screen p-10 flex flex-col">

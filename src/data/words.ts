@@ -6,14 +6,14 @@ export const words: Word[] = [
   {
     id: 1,
     text: "ground",
-    audioUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    audio: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
     imgUrl: groundSrc,
     sentences: []
   },
   {
     id: 2,
     text: "ice cream",
-    audioUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    audio: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
     imgUrl: iceCreamSrc,
     sentences: []
   },
@@ -21,7 +21,7 @@ export const words: Word[] = [
     id: 3,
     text: "ago",
     imgUrl: agoSrc,
-    audioUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    audio: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
     sentences: []
   },
 ];

@@ -3,7 +3,7 @@ type Word = {
   text: string;
   audio: string;
   imgUrl?: string;
-  sentence?: string;
+  sentences?: string[];
 }
 
 type Unit = {
