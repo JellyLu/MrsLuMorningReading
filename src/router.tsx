@@ -13,19 +13,21 @@ export const router = createBrowserRouter(
           lazy: () => import("./pages/Home"),
         },
         {
-          path: "terms",
+          path: "/terms",
           lazy: () => import("./pages/TermList"),
           handle: { bgColor: "#FFF4EA" },
         },
         {
-          path: "term/:termId",
+          path: "/term/:termId",
           lazy: () => import("./pages/Term"),
           handle: { bgColor: "#FFF4EA" },
-        },
-        {
-          path: "term/:termId/lesson/:lessonId",
-          lazy: () => import("./pages/LessonDetail"),
-          handle: { bgColor: "#FFF4EA" },
+          children: [
+            {
+              path: "section/:sectionId/unit/:unitId",
+              lazy: () => import("./pages/UnitDetail"),
+              handle: { bgColor: "#FFF4EA" },
+            }
+          ]
         },
       ],
     },
