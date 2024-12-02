@@ -27,7 +27,7 @@ const useTerms = () => {
     }
     return section.units;
   }, [section]);
-  const unit = units.find((unit) => unit.id === unitId);
+  const unit: Unit | undefined = units.find((unit) => unit.id === unitId);
 
   console.log("======terms", terms,
     "term", term,

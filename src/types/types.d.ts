@@ -1,6 +1,6 @@
 type Word = {
   id: number;
-  name: string;
+  text: string;
   audio: string;
   imgUrl?: string;
   sentence?: string;

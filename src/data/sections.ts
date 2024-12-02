@@ -1,4 +1,5 @@
 import term9Module1 from "@/assets/sections/term-9-module-1.png";
+import { words } from "./words";
 
 export const sections: Section[] = [
   {
@@ -11,13 +12,13 @@ export const sections: Section[] = [
         id: 1,
         name: "Unit 1 Did you come back yesterday",
         description: "Unit 1 Did you come back yesterday",
-        words: [],
+        words: [...words, ...words, ...words],
       },
       {
         id: 2,
         name: "Unit 2 We bought ice creams",
         description: "Unit 2 We bought ice creams",
-        words: [],
+        words,
       }
     ]
   },

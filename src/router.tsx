@@ -19,13 +19,15 @@ export const router = createBrowserRouter(
         },
         {
           path: "/term/:termId",
-          lazy: () => import("./pages/Term"),
           handle: { bgColor: "#FFF4EA" },
           children: [
             {
+              index: true,
+              lazy: () => import("./pages/Term"),
+            },
+            {
               path: "section/:sectionId/unit/:unitId",
               lazy: () => import("./pages/UnitDetail"),
-              handle: { bgColor: "#FFF4EA" },
             }
           ]
         },
