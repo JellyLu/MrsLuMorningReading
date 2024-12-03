@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import useTerms from "@/hooks/useTerms";
 import Speaker from "@/components/Speaker";
 import classNames from "classnames";
@@ -15,6 +15,57 @@ interface WordCardProps {
 }
 const WordCard = ({ className, word, onClick, onClickAudio, isActive = false, playingType = "uk", size = "small" }: WordCardProps) => {
   const { id, imgUrl, text } = word;
+  const ukAudioRef = useRef<HTMLAudioElement>(null);
+  const usAudioRef = useRef<HTMLAudioElement>(null);
+
+  useEffect(() => {
+    if (isActive && ukAudioRef.current && playingType === "uk") {
+      ukAudioRef.current.play();
+    } else if (isActive && usAudioRef.current && playingType === "us") {
+      usAudioRef.current.play();
+    }
+  }, [isActive, playingType]);
+
+  const renderDetails = () => {
+    if (size !== "large") {
+      return null;
+    }
+    return (
+      <div className={classNames("flex items-center gap-2")}>
+        <div className="flex items-center">
+          <span className="text-sm text-purple-1">
+          uk /{word.pronunciations.uk}/
+          </span>
+          {word.audios?.uk &&
+            <>
+              <audio src={word.audios.uk} ref={ukAudioRef}/>
+              <Speaker
+                isPlaying={playingType === "uk" && !ukAudioRef.current?.paused}
+                className="w-8 h-8 text-pri-2 ml-1"
+                onClick={() => onClickAudio?.("uk")}
+              />
+            </>
+          }
+        </div>
+        <div className="flex items-center">
+          <span className="text-sm text-blue-1">
+            us /{word.pronunciations.us}/
+          </span>
+          {word.audios?.uk &&
+            <>
+              <audio src={word.audios.us} ref={usAudioRef}/>
+              <Speaker
+                isPlaying={playingType === "us" &&!usAudioRef.current?.paused}
+                className="w-8 h-8 text-pri-2 ml-1"
+                onClick={() => onClickAudio?.("us")}
+              />
+            </>
+          }
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div
       key={id}
@@ -37,29 +88,7 @@ const WordCard = ({ className, word, onClick, onClickAudio, isActive = false, pl
       <div className="flex items-center justify-center mt-6">
         <span className="text-3xl text-aux-1 font-bold">{text}</span>
       </div>
-      <div className={classNames(
-        "flex items-center",
-        {
-          "flex-col": size === "small",
-          "gap-2": size === "large",
-        })}
-      >
-        <div className="flex items-center"><span className="text-sm text-purple-1">uk /{word.pronunciations.uk}/</span>
-          <Speaker
-          isPlaying={isActive && playingType === "uk"}
-          className="w-8 h-8 text-pri-2 ml-1"
-          onClick={() => onClickAudio?.("uk")}
-        />
-        </div>
-        <div className="flex items-center">
-          <span className="text-sm text-blue-1">us /{word.pronunciations.us}/</span>
-          <Speaker
-            isPlaying={isActive && playingType === "us"}
-            className="w-8 h-8 text-pri-2 ml-1"
-            onClick={() => onClickAudio?.("us")}
-          />
-        </div>
-      </div>
+      {renderDetails()}
     </div>
   )
 }

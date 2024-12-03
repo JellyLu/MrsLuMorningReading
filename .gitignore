@@ -13,6 +13,7 @@ dist-ssr
 .husky
 *.local
 scripts/sourceData/path
+scripts/sourceData/output.json
 
 # Editor directories and files
 .vscode/*
