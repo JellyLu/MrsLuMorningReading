@@ -9,9 +9,11 @@ interface WordCardProps {
   size?: "small" | "large";
   className?: string;
   onClick?: () => void;
-  isPlaying?: boolean;
+  onClickAudio?: (type: "uk" | "us") => void;
+  isActive?: boolean;
+  playingType?: "uk" | "us";
 }
-const WordCard = ({ className, word, onClick, isPlaying = false, size = "small" }: WordCardProps) => {
+const WordCard = ({ className, word, onClick, onClickAudio, isActive = false, playingType = "uk", size = "small" }: WordCardProps) => {
   const { id, imgUrl, text } = word;
   return (
     <div
@@ -33,11 +35,30 @@ const WordCard = ({ className, word, onClick, isPlaying = false, size = "small" 
           })}
       />
       <div className="flex items-center justify-center mt-6">
-        <span className="text-2xl text-aux-1 font-bold">{text}</span>
-        <Speaker
-          isPlaying={isPlaying}
+        <span className="text-3xl text-aux-1 font-bold">{text}</span>
+      </div>
+      <div className={classNames(
+        "flex items-center",
+        {
+          "flex-col": size === "small",
+          "gap-2": size === "large",
+        })}
+      >
+        <div className="flex items-center"><span className="text-sm text-purple-1">uk /{word.pronunciations.uk}/</span>
+          <Speaker
+          isPlaying={isActive && playingType === "uk"}
           className="w-8 h-8 text-pri-2 ml-1"
+          onClick={() => onClickAudio?.("uk")}
         />
+        </div>
+        <div className="flex items-center">
+          <span className="text-sm text-blue-1">us /{word.pronunciations.us}/</span>
+          <Speaker
+            isPlaying={isActive && playingType === "us"}
+            className="w-8 h-8 text-pri-2 ml-1"
+            onClick={() => onClickAudio?.("us")}
+          />
+        </div>
       </div>
     </div>
   )
@@ -46,6 +67,7 @@ const WordCard = ({ className, word, onClick, isPlaying = false, size = "small" 
 export function Component() {
   const { unit } = useTerms();
   const [current, setCurrent] = useState(0);
+  const [type, setType] = useState<"uk" | "us">("uk");
 
   if (!unit) {
     return null;
@@ -58,8 +80,10 @@ export function Component() {
         <WordCard
           key={`word-${unit.words[current].id}-${current}`}
           word={unit.words[current]}
-          isPlaying
+          isActive
+          playingType={type}
           size="large"
+          onClickAudio={(type) => setType(type)}
           className="grow-0 mb-10 flex-1 flex items-center justify-center"
         />
         <div className="h-full overflow-y-auto flex flex-col gap-6 ml-6 w-[240px] shrink-0">
@@ -69,13 +93,14 @@ export function Component() {
                 key={word.id}
                 word={word}
                 onClick={() => setCurrent(index)}
-                isPlaying={current === index}
+                isActive={current === index}
+                playingType={type}
+                onClickAudio={(type) => setType(type)}
               />
             ))
           }
         </div>
       </div>
-
     </div>
   );
 }
