@@ -1,7 +1,14 @@
 type Word = {
   id: number;
   text: string;
-  audio: string;
+  pronunciations: {
+    uk?: string;
+    us?: string;
+  }
+  audios?: {
+    uk?: string;
+    us?: string;
+  },
   imgUrl?: string;
   sentences?: string[];
 }
