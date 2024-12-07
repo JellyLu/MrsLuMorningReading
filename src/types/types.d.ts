@@ -1,6 +1,7 @@
 type Word = {
   id: string;
   text: string;
+  translation?: string;
   pronunciations: {
     uk?: string;
     us?: string;
